@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body{
+            background-color: goldenrod;
+            box-sizing: border-box;
+        }
+
+        h2{
+            text-align: center;
+        }
+
+        nav{
+            width: auto;
+            height: 10vh;
+            background-color: dodgerblue;
+        }
+        .links{
+            display: flex;
+            justify-content: space-evenly;
+            padding: 20px;
+            padding-left: 60%;
+        }
+
+        a{
+            color: snow;
+            font-size: larger;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        img{
+            width: 200px;
+            height: 200px;
+            border: 5px solid white;
+            border-radius: 100px;
+            object-fit: cover;
+        }
+
+        .prof{
+            height: 50vh;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border: none;
+            background-color: tomato;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="links">
+                <a href="#">Home</a>
+                <a href="#">Profile</a>
+                <a href="#">Wallet</a>
+                <a href="#">Log out</a>
+                <a href="#">Developer</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="prof">
+            <img src="{{profile.image.url}}" alt="">
+            <h3>{{profile.first_name}} {{profile.last_name}}</h3>
+            <h4>{{profile.bio}}</h4>
+        </div>
+    </main>
+</body>
+</html>

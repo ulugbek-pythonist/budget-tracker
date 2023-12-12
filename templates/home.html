@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body{
+            background-color: goldenrod;
+            box-sizing: border-box;
+        }
+
+        h2{
+            text-align: center;
+        }
+
+        nav{
+            width: auto;
+            height: 10vh;
+            background-color: dodgerblue;
+        }
+        .links{
+            display: flex;
+            justify-content: space-evenly;
+            padding: 20px;
+            padding-left: 60%;
+        }
+
+        a{
+            color: snow;
+            font-size: larger;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <header>
+        <nav>
+            <div class="links">
+                <a href="#">Home</a>
+                <a href="#">Profile</a>
+                <a href="#">Wallet</a>
+                <a href="#">Log out</a>
+                <a href="#">Developer</a>
+            </div>
+        </nav>
+    </header>
+    {% else %}
+    <header>
+        <nav>
+            <div class="links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Register</a>
+                <a href="#">Login</a>
+                <a href="#">Developer</a>
+            </div>
+        </nav>
+    </header>
+
+    {% endif %}
+    <main>
+        <h2>Budget tracker</h2>
+    </main>
+</body>
+</html>
