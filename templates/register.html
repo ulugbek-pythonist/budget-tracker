@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body{
+            background-color: antiquewhite;
+            box-sizing: border-box;
+        }
+
+        h2{
+            text-align: center;
+        }
+
+        nav{
+            width: auto;
+            height: 10vh;
+            background-color: tomato;
+        }
+        .links{
+            display: flex;
+            justify-content: space-evenly;
+            padding: 20px;
+            padding-left: 60%;
+        }
+
+        a{
+            color: snow;
+            font-size: larger;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgb(244,0,14);
+            background-color: dodgerblue;
+            border-radius: 8%;
+            padding: 12px;
+            max-width: 33%;
+            margin-left: 34%;
+        }
+        input{
+            width: 47%;
+            height: 25px;
+            border: 1px solid black;
+            border-radius: 2%;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="links">
+                <a href="{% url 'home' %}">Home</a>
+                <a href="#">About</a>
+                <a href="#">Login</a>
+                <a href="#">Developer</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h2>Registration</h2>
+        <br><br>
+        <form  method="post" enctype="multipart/form-data">
+
+            {% csrf_token %}
+            
+            <input type="text" name="first_name" placeholder="first name" required="required"><br><br>
+            <input type="text" name="last_name" placeholder="last name" required="required"><br><br>
+            <input type="text" name="bio" placeholder="bio"><br><br>
+            <input type="text" name="username" placeholder="username" required="required"><br><br>
+            <input type="password" name="password" placeholder="password" required="required"><br><br>
+
+            <button type="submit" class="tugma">Finish</button>
+        </form>
+    </main>
+</body>
+</html>

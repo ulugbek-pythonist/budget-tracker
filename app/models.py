@@ -1,4 +1,3 @@
-from collections.abc import Iterable
 import decimal
 from django.db import models
 
@@ -8,7 +7,7 @@ User = get_user_model()
 
 
 class Wallet(models.Model):
-    owner = models.ForeignKey(User,on_delete=models.CASCADE)
+    owner = models.OneToOneField(User,on_delete=models.CASCADE)
     balance = models.DecimalField(max_digits=15,decimal_places=2,default=decimal.Decimal(0))
 
     def __str__(self) -> str:
@@ -19,7 +18,8 @@ class Income(models.Model):
     wallet = models.ForeignKey(Wallet,on_delete=models.CASCADE)
     source = models.CharField(max_length=255)
     amount = models.DecimalField(max_digits=15,decimal_places=2)
-    date_operation = models.DateTimeField(auto_now_add=True)
+    date_operation = models.DateField(auto_now_add=True)
+    date_updated = models.DateField(auto_now=True)
 
     def __str__(self) -> str:
         return self.wallet.owner.get_username()
@@ -29,7 +29,8 @@ class Expense(models.Model):
     wallet = models.ForeignKey(Wallet,on_delete=models.CASCADE)
     destination = models.CharField(max_length=255)
     amount = models.DecimalField(max_digits=15,decimal_places=2)
-    date_operation = models.DateTimeField(auto_now_add=True)
+    date_operation = models.DateField(auto_now_add=True)
+    date_updated = models.DateField(auto_now=True)
 
     def __str__(self) -> str:
         return self.wallet.owner.get_username()
