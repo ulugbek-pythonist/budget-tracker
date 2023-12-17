@@ -33,24 +33,6 @@
             text-decoration: none;
         }
 
-        form{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: rgb(244,0,14);
-            background-color: dodgerblue;
-            border-radius: 8%;
-            padding: 12px;
-            max-width: 33%;
-            margin-left: 34%;
-        }
-        input{
-            width: 47%;
-            height: 25px;
-            border: 1px solid black;
-            border-radius: 2%;
-        }
-
     </style>
 </head>
 <body>
@@ -71,11 +53,7 @@
 
             {% csrf_token %}
             
-            <input type="text" name="first_name" placeholder="first name" required="required"><br><br>
-            <input type="text" name="last_name" placeholder="last name" required="required"><br><br>
-            <input type="text" name="bio" placeholder="bio"><br><br>
-            <input type="text" name="username" placeholder="username" required="required"><br><br>
-            <input type="password" name="password" placeholder="password" required="required"><br><br>
+            {{form.as_p}}
 
             <button type="submit" class="tugma">Finish</button>
         </form>

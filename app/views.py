@@ -1,9 +1,10 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
 
 from .forms import RegisterForm
 
-from .models import Profile, User, Wallet
+from .models import Profile, Wallet
 
 
 def home(request):
@@ -24,19 +25,19 @@ def wallet(request):
 
 
 def registration(request):
-    if request.method == 'GET':
-        return render(request,"register.html")
-    else:
+    if request.method == 'POST':
         form = RegisterForm(request.POST)
+
         if form.is_valid():
-            user = User.objects.create(username=form.cleaned_data["username"])
-            user.set_password(form.cleaned_data["password"])
-            user.save()
-            first_name = form.cleaned_data["first_name"]
-            last_name = form.cleaned_data["last_name"]
-            bio = form.cleaned_data["bio"]
-            profil = Profile.objects.create(user=user,first_name=first_name,last_name=last_name,bio=bio)
-            profil.save()
+            user = form.save()
+            login(request,user)
             return redirect("home")
-        else:
-            return render(request,"register.html")
+    else:
+        form = RegisterForm()
+        return render(request,"register.html",{"form":form})
+    
+def add_income(request):
+    pass
+
+def add_expense(request):
+    pass 
