@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
+from django.forms import ModelForm
 
-from .models import User
+from .models import Income, User
 
 
 class RegisterForm(UserCreationForm):
@@ -8,3 +9,8 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = ["username","email","password1","password2"]
     
+
+class IncomeForm(ModelForm):
+    class Meta:
+        model = Income
+        fields = ["source","amount"]

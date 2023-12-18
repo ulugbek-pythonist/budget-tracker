@@ -69,6 +69,10 @@
             <img src="{{request.user.profile.image.url}}" alt="">
             <h3>$ {{wallet.balance}}</h3>
         </div>
+
+        <div>
+            <a href="{% url 'add-income' %}">Add income</a>
+        </div>
     </main>
 </body>
 </html>

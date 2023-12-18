@@ -13,7 +13,7 @@ class Wallet(models.Model):
         return self.owner.get_username()
     
     def income(self,amount):
-        self.balance += amount
+        self.balance = self.balance + amount
 
     def expense(self,amount):
         if self.balance >= amount:

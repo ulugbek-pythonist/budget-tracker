@@ -1,10 +1,9 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
+from .forms import IncomeForm, RegisterForm
 
-from .forms import RegisterForm
-
-from .models import Profile, Wallet
+from .models import Income, Profile, Wallet
 
 
 def home(request):
@@ -35,9 +34,24 @@ def registration(request):
     else:
         form = RegisterForm()
         return render(request,"register.html",{"form":form})
-    
+
 def add_income(request):
-    pass
+    if request.method == 'POST':
+        form = IncomeForm(request.POST)
+        if form.is_valid():
+            source = form.cleaned_data["source"]
+            amount = form.cleaned_data["amount"]
+            income = Income.objects.create(wallet=request.user.wallet,source=source,amount=amount)
+            income.save()
+            hamyon = Wallet.objects.filter(owner=request.user).first()
+            hamyon.income(amount)
+            hamyon.save()
+            return redirect("wallet")
+        else:
+            return redirect("wallet")
+    else:
+        form = IncomeForm()
+        return render(request,"add-income.html",{"form":form})
 
 def add_expense(request):
     pass 
