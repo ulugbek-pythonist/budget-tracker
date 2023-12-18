@@ -1,9 +1,10 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
-from .forms import IncomeForm, RegisterForm
+from django.contrib import messages
+from .forms import ExpenseForm, IncomeForm, RegisterForm
 
-from .models import Income, Profile, Wallet
+from .models import Expense, Income, Profile, Wallet
 
 
 def home(request):
@@ -44,6 +45,7 @@ def add_income(request):
             income = Income.objects.create(wallet=request.user.wallet,source=source,amount=amount)
             income.save()
             hamyon = Wallet.objects.filter(owner=request.user).first()
+            messages.success(request,message=f"${amount} added to wallet!")
             hamyon.income(amount)
             hamyon.save()
             return redirect("wallet")
@@ -54,4 +56,22 @@ def add_income(request):
         return render(request,"add-income.html",{"form":form})
 
 def add_expense(request):
+    if request.method == 'POST':
+        form = ExpenseForm(request.POST)
+        if form.is_valid():
+            source = form.cleaned_data["destination"]
+            amount = form.cleaned_data["amount"]
+            expense = Expense.objects.create(wallet=request.user.wallet,destination=source,amount=amount)
+            expense.save()
+            hamyon = Wallet.objects.filter(owner=request.user).first()
+            state = hamyon.expense(amount)
+            hamyon.save()
+            if not state:
+                messages.warning(request,message="Not enough money in wallet")
+            return redirect("wallet")
+        else:
+            return redirect("wallet")
+    else:
+        form = ExpenseForm()
+        return render(request,"add-expense.html",{"form":form})
     pass 
