@@ -1,0 +1,76 @@
+<style>
+
+    body{
+        background-color: goldenrod;
+    }
+    .info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10%;
+    }
+
+    table,th,td {
+        border: 2px solid black;
+        border-radius: 2%;
+        border-collapse: collapse;
+        padding: 10px;
+    }
+    table{
+        width: 60%;
+    }
+
+    th{
+        background-color: gold;
+    }
+
+    td{
+        background-color: lightgreen;
+    }
+    a{
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.4rem;
+        color: whitesmoke;
+    }
+    .tugma{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 2px solid antiquewhite;
+        width: 90px;
+        height: auto;
+        margin-left: 43%;
+        border-radius: 45px;
+    }
+    .tugma:hover{
+        background-color: dodgerblue;
+    }
+    .tugma:active{
+        background-color: tomato;
+    }
+</style>
+<body>
+    <div class="info">
+        <table>
+            <tr>
+                <th>No</th>
+                <th>Amount</th>
+                <th>Source</th>
+                <th>Date</th>
+            </tr>
+            {% for income in incomes %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{income.amount}} $</td>
+                <td>{{income.source}}</td>
+                <td>{{income.date_operation}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <br>
+    <div class="tugma">
+        <a href="{% url 'wallet' %}">back</a>
+    </div>
+</body>
